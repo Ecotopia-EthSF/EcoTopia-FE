@@ -132,7 +132,7 @@ export default function ShareView({ nftSlug = '#' }: Props) {
                 $25 USDC
               </div>
               <h3 className="mb-2 text-center text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 3xl:mb-3">
-                Every month, you will earn: 2.5% APY based on a 12-month period
+                Every month, you will earn: 7% APY based on a 12-month period
               </h3>
               <div>
                 <span className="-mx-6 block border-t border-dashed border-t-gray-200 dark:border-t-gray-700 3xl:-mx-8" />
