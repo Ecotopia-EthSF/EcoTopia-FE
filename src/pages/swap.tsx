@@ -24,13 +24,12 @@ const searchFilter = [
 
 const SwapPage: NextPageWithLayout = () => {
   let [toggleCoin, setToggleCoin] = useState(false);
+  let [tellorValue, setTellorValue] = useState('');
+
   const { openModal } = useModal();
   return (
     <>
-      <NextSeo
-        title="Ecotopia"
-        description="Carbon ofsetting Defi protocol"
-      />
+      <NextSeo title="Ecotopia" description="Carbon ofsetting Defi protocol" />
       <Trade>
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
           <div
@@ -39,23 +38,22 @@ const SwapPage: NextPageWithLayout = () => {
               toggleCoin ? 'flex-col-reverse' : 'flex-col'
             )}
           >
-
-        <div className="mt-4 flex flex-wrap gap-3 sm:mt-5 lg:mt-6">
-          {searchFilter?.map((item) => (
-            <div key={item?.id} role="button">
-              <ListCard
-                item={item}
-                className="shrink-0 rounded-full p-2 transition-transform hover:-translate-y-0.5 hover:bg-gray-50 focus:-translate-y-0.5 focus:bg-gray-50 ltr:pr-5 rtl:pl-5"
-              />
+            <div className="mt-4 flex flex-wrap gap-3 sm:mt-5 lg:mt-6">
+              {searchFilter?.map((item) => (
+                <div key={item?.id} role="button">
+                  <ListCard
+                    item={item}
+                    className="shrink-0 rounded-full p-2 transition-transform hover:-translate-y-0.5 hover:bg-gray-50 focus:-translate-y-0.5 focus:bg-gray-50 ltr:pr-5 rtl:pl-5"
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-            
+
             <CoinInput
               // label={'From'}
               exchangeRate={0.0}
-              defaultCoinIndex={0}
-              getCoinValue={(data) => console.log('From coin value:', data)}
+              defaultCoinIndex={4}
+              getCoinValue={(data) => setTellorValue(data.value)}
             />
           </div>
         </div>
@@ -63,8 +61,11 @@ const SwapPage: NextPageWithLayout = () => {
           {/* <TransactionInfo label={'Min. Received'} />
           <TransactionInfo label={'Rate'} />
           <TransactionInfo label={'Offered by'} /> */}
-          <TransactionInfo label={'Current Annual Rate (APR):'} value={'1%'} />
-          <TransactionInfo label={'Current Annual Carbon offset (Tonnes):'} value={'20'} />
+          <TransactionInfo label={'Current Annual Rate (APR):'} value={'7%'} />
+          <TransactionInfo
+            label={'Current Annual Carbon offset (Tonnes):'}
+            value={(parseInt(tellorValue) * 7) / 100}
+          />
           {/* <TransactionInfo label={'Network Fee'} />
           <TransactionInfo label={'Criptic Fee'} /> */}
         </div>
@@ -73,12 +74,11 @@ const SwapPage: NextPageWithLayout = () => {
           shape="rounded"
           fullWidth={true}
           className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
-           onClick={() => openModal('SHARE_VIEW')}
+          onClick={() => openModal('SHARE_VIEW')}
           // onClick={() => openModal('WALLET_CONNECT_VIEW')}
         >
           DEPOSIT
         </Button>
-
       </Trade>
     </>
   );

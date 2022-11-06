@@ -41,14 +41,15 @@ export default function ShareView({ nftSlug = '#' }: Props) {
   let [_, copyToClipboard] = useCopyToClipboard();
 
   // const web3 = new createAlchemyWeb3("https://polygon-mumbai.g.alchemy.com/v2/Gl5dXu7YF2nbWXwr7Tw-44iZ1mw1RX3h");
-  const web3 = new Web3(Web3.givenProvider || "https://www.leisurecreatures.com");
+  const web3 = new Web3(
+    Web3.givenProvider || 'https://www.leisurecreatures.com'
+  );
   // var contract = new web3.eth.Contract(CONTACT_ABI, CONTRACT_ADDRESS);
-  
 
-  const tUSDContractAddress = "0xB579C5ba3Bc8EA2F5DD5622f1a5EaC6282516fB1";
+  const tUSDContractAddress = '0xB579C5ba3Bc8EA2F5DD5622f1a5EaC6282516fB1';
   // const tUSDContract = new web3.eth.Contract(tusdABI, tUSDContractAddress);
-  const ecoTopiaContractAddress = "0x428590b0833FcA5d2949D88c8788d78726e11554";
-  const ecoTopiaContract = new web3.eth.Contract(ecoTopiaABI, ecoTopiaContractAddress);
+  const ecoTopiaContractAddress = '0x428590b0833FcA5d2949D88c8788d78726e11554';
+  // const ecoTopiaContract = new web3.eth.Contract(ecoTopiaABI, ecoTopiaContractAddress);
 
   const handleCopyToClipboard = () => {
     copyToClipboard(nftUrl);
@@ -58,40 +59,43 @@ export default function ShareView({ nftSlug = '#' }: Props) {
     }, 1000);
   };
 
-
   // Creates fund transfer transaction
   const handleDeposit = async () => {
     try {
-      // const { mumbai } = window;
+      const { ethereum } = window;
       // console.log('print eth: ', mumbai)
 
       // if (mumbai) {
-        const provider = new ethers.providers.JsonRpcProvider();
-        const signer = provider.getSigner();
+      const provider = new ethers.providers.Web3Provider(ethereum); // new ethers.providers.JsonRpcProvider("https://polygon-mumbai.g.alchemy.com/v2/Gl5dXu7YF2nbWXwr7Tw-44iZ1mw1RX3h");
+      const signer = provider.getSigner();
 
-        const ecoContract = new ethers.Contract(
-          ecoTopiaContractAddress,
-          ecoTopiaABI,
-          signer
-        );
+      const tUSDContract = new ethers.Contract(
+        tUSDContractAddress,
+        tusdABI,
+        signer
+      );
 
-        let p2eTx = await ecoContract.depositAlluo( tUSDContractAddress, 1);
-        console.log("Staking....", p2eTx.hash);
+      // let x = await tUSDContract.approve(ecoTopiaContractAddress, 1);
+      const ecoContract = new ethers.Contract(
+        ecoTopiaContractAddress,
+        ecoTopiaABI,
+        signer
+      );
 
-        let tx = await p2eTx.wait();
+      let p2eTx = await ecoContract.depositAlluo(tUSDContractAddress, 1);
+      console.log('Staking....', p2eTx.hash);
 
-        // setMiningStatus(1)
+      let tx = await p2eTx.wait();
+
+      // setMiningStatus(1)
       // } else {
-        //setWalletError("Please install MetaMask Wallet.");
+      //setWalletError("Please install MetaMask Wallet.");
       // }
     } catch (error) {
-      console.log('Error minting character', error)
+      console.log('Error minting character', error);
       //setTxError(error.message);
     }
   };
-
-
-
 
   //   // tUSDContract.methods.approve(ecoTopiaContractAddress, 1 * 10^6).send().then(() => {
   //     console.log("Here 1");
@@ -107,46 +111,49 @@ export default function ShareView({ nftSlug = '#' }: Props) {
   //   // });
   // };
 
-
-
-
   return (
     <div className="rounded-2xl border border-gray-200 bg-white px-5 pt-5 pb-7 dark:border-gray-700 dark:bg-light-dark sm:px-7 sm:pb-8 sm:pt-6">
       <div className="text-lg font-medium uppercase -tracking-wide text-gray-900 ltr:text-left rtl:text-right dark:text-white lg:text-xl">
-
         <Scrollbar style={{ height: 'calc(100% + 20px)' }}>
-        <div className=" pb-5 ">
-          <div className="my-16 mx-5 flex h-full flex-col justify-center rounded-lg  bg-transparent p-6 dark:bg-light-dark sm:mx-6 xl:my-0 xl:mx-0 xl:p-8">
-            <h1 className="mb-6 text-center uppercase tracking-wider ">
-            Deposit Confirmation
-            </h1>
-            <h3 className="mb-2 text-center text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 3xl:mb-3">
-            You confirm that you are depositing on EcoTopia:
-            </h3>
-            <div className="mb-7 text-center font-medium tracking-tighter text-gray-900 dark:text-white xl:text-2xl 3xl:mb-8 3xl:text-[32px]" style={{fontSize:"40px", paddingTop:"8%", paddingBottom:"8%", color:" #5F8BFC"}}>
-              $80 USDC
-            </div>
-            <h3 className="mb-2 text-center text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 3xl:mb-3">
-              Every month, you will earn: 2.5% APY based on a 12-month period
-            </h3>
-            <div>
-              <span className="-mx-6 block border-t border-dashed border-t-gray-200 dark:border-t-gray-700 3xl:-mx-8" />
-              
-              <Button
-                size="large"
-                shape="rounded"
-                fullWidth={true}
-                onClick={() => handleDeposit()}
-                className="mt-6 uppercase xs:mt-8 xs:tracking-widest xl:px-2 2xl:px-9"
+          <div className=" pb-5 ">
+            <div className="my-16 mx-5 flex h-full flex-col justify-center rounded-lg  bg-transparent p-6 dark:bg-light-dark sm:mx-6 xl:my-0 xl:mx-0 xl:p-8">
+              <h1 className="mb-6 text-center uppercase tracking-wider ">
+                Deposit Confirmation
+              </h1>
+              <h3 className="mb-2 text-center text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 3xl:mb-3">
+                You confirm that you are depositing on EcoTopia:
+              </h3>
+              <div
+                className="mb-7 text-center font-medium tracking-tighter text-gray-900 dark:text-white xl:text-2xl 3xl:mb-8 3xl:text-[32px]"
+                style={{
+                  fontSize: '40px',
+                  paddingTop: '8%',
+                  paddingBottom: '8%',
+                  color: ' #5F8BFC',
+                }}
               >
-                Confirm Deposit
-              </Button>
+                $25 USDC
+              </div>
+              <h3 className="mb-2 text-center text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 3xl:mb-3">
+                Every month, you will earn: 2.5% APY based on a 12-month period
+              </h3>
+              <div>
+                <span className="-mx-6 block border-t border-dashed border-t-gray-200 dark:border-t-gray-700 3xl:-mx-8" />
+
+                <Button
+                  size="large"
+                  shape="rounded"
+                  fullWidth={true}
+                  onClick={() => handleDeposit()}
+                  className="mt-6 uppercase xs:mt-8 xs:tracking-widest xl:px-2 2xl:px-9"
+                >
+                  Confirm Deposit
+                </Button>
+              </div>
+              <span className="-mx-6 block border-t border-dashed border-t-gray-200 dark:border-t-gray-700 3xl:-mx-8" />
             </div>
-            <span className="-mx-6 block border-t border-dashed border-t-gray-200 dark:border-t-gray-700 3xl:-mx-8" />
-  
           </div>
-        </div>
-      </Scrollbar>
+        </Scrollbar>
       </div>
 
       {/* <div className="flex flex-wrap gap-2 pt-4 md:gap-2.5 xl:pt-5">
