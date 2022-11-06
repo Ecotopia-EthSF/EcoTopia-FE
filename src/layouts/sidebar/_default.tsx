@@ -17,15 +17,17 @@ import { Close } from '@/components/icons/close';
 import { PlusCircle } from '@/components/icons/plus-circle';
 import { CompassIcon } from '@/components/icons/compass';
 import { InfoCircle } from '@/components/icons/info-circle';
+import { useState, useEffect } from 'react';
+import { ethers } from 'ethers';
 
 //images
 import AuthorImage from '@/assets/images/author.jpg';
 
 export const menuItems = [
-   {
-     name: 'Home',
-     icon: <HomeIcon />,
-     href: routes.home,
+  {
+    name: 'Home',
+    icon: <HomeIcon />,
+    href: routes.home,
     // dropdownItems: [
     //   {
     //     name: 'Modern',
@@ -44,7 +46,7 @@ export const menuItems = [
     //     href: routes.classic,
     //   },
     // ],
-   },
+  },
   {
     name: 'Stake',
     icon: <ExchangeIcon />,
@@ -54,7 +56,7 @@ export const menuItems = [
     name: 'Feed',
     icon: <FarmIcon />,
     href: routes.notification,
-  }
+  },
   // {
   //   name: 'Liquidity',
   //   icon: <PoolIcon />,
@@ -107,6 +109,34 @@ type SidebarProps = {
 
 export default function Sidebar({ className }: SidebarProps) {
   const { closeDrawer } = useDrawer();
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const handleWalletConnect = async () => {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        await provider.send('eth_requestAccounts', []);
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        const ens = await provider.lookupAddress(
+          window.ethereum.selectedAddress
+        );
+        console.log(address);
+        console.log(ens);
+        if (ens !== null) {
+          setName(ens);
+        } else {
+          setName(address);
+        }
+      } else {
+        alert('no wallet detected!');
+      }
+    };
+
+    handleWalletConnect().catch(console.error);
+  });
+
   return (
     <aside
       className={cn(
@@ -134,7 +164,7 @@ export default function Sidebar({ className }: SidebarProps) {
         <div className="px-6 pb-5 2xl:px-8">
           <AuthorCard
             image={AuthorImage}
-            name="Cameron Williamson"
+            name={name}
             // role="admin"
           />
 
