@@ -41,9 +41,6 @@ export default function ShareView({ nftSlug = '#' }: Props) {
   let [_, copyToClipboard] = useCopyToClipboard();
 
   // const web3 = new createAlchemyWeb3("https://polygon-mumbai.g.alchemy.com/v2/Gl5dXu7YF2nbWXwr7Tw-44iZ1mw1RX3h");
-  const web3 = new Web3(
-    Web3.givenProvider || 'https://www.leisurecreatures.com'
-  );
   // var contract = new web3.eth.Contract(CONTACT_ABI, CONTRACT_ADDRESS);
 
   const tUSDContractAddress = '0xB579C5ba3Bc8EA2F5DD5622f1a5EaC6282516fB1';
@@ -92,7 +89,7 @@ export default function ShareView({ nftSlug = '#' }: Props) {
       //setWalletError("Please install MetaMask Wallet.");
       // }
     } catch (error) {
-      console.log('Error minting character', error);
+      console.log('Error depositing ', error);
       //setTxError(error.message);
     }
   };

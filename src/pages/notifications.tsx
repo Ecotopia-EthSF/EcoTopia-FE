@@ -13,61 +13,57 @@ import User2 from '@/assets/images/avatar/9.jpg';
 import User3 from '@/assets/images/avatar/10.jpg';
 import User4 from '@/assets/images/avatar/11.jpg';
 
-
 const notifications = [
   {
     id: 1,
     type: 'offsetted',
     actor: {
-      name: 'dolcemariposa',
+      name: 'Shradzz',
       avatar: User1,
     },
     time: 'Just Now',
     url: '',
-    notifier: '1 tonne',
+    notifier: '1 ton',
   },
   {
     id: 2,
     type: 'offsetted',
     actor: {
-      name: 'pimptronot',
+      name: 'RichExplorer',
       avatar: User2,
     },
     time: '10 minutes ago',
     url: '#',
-    notifier: '1 tonne',
+    notifier: '1 ton',
   },
   {
     id: 3,
     type: 'offsetted',
     actor: {
-      name: 'centralgold',
+      name: 'Mkkk',
       avatar: User3,
     },
     time: '20 minutes ago',
     url: '#',
-    notifier: '2 tonne',
+    notifier: '2 ton',
   },
   {
     id: 4,
     type: 'offsetted',
     actor: {
-      name: 'theline',
+      name: 'Debstep',
       avatar: User4,
     },
     time: '30 minutes ago',
     url: '#',
-    notifier: '5 tonne',
+    notifier: '5 ton',
   },
 ];
 
 const NotificationPage: NextPageWithLayout = () => {
   return (
     <>
-      <NextSeo
-        title="Ecotopia"
-        description="Carbon ofsetting Defi protocol"
-      />
+      <NextSeo title="Ecotopia" description="Carbon ofsetting Defi protocol" />
       <div className="mx-auto w-[660px] max-w-full">
         <div className="mb-7 flex items-center justify-between gap-6">
           <h2 className="text-center text-lg font-medium text-gray-900 dark:text-white sm:text-xl lg:text-2xl">
@@ -78,8 +74,7 @@ const NotificationPage: NextPageWithLayout = () => {
             variant="transparent"
             size="mini"
             shape="rounded"
-          >
-          </Button>
+          ></Button>
         </div>
 
         {notifications.map((notification) => {

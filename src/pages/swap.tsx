@@ -63,7 +63,7 @@ const SwapPage: NextPageWithLayout = () => {
           <TransactionInfo label={'Offered by'} /> */}
           <TransactionInfo label={'Current Annual Rate (APR):'} value={'7%'} />
           <TransactionInfo
-            label={'Current Annual Carbon offset (Tonnes):'}
+            label={'Current Annual Carbon offset (Tons):'}
             value={(parseInt(tellorValue) * 7) / 100}
           />
           {/* <TransactionInfo label={'Network Fee'} />

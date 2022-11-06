@@ -19,14 +19,17 @@ function CustomAxis({ x, y, payload }: any) {
 
 const numberAbbr = (number: any) => {
   if (number < 1e3) return number;
-  if (number >= 1e3 && number < 1e6) return +(number / 1e3).toFixed(1) + ' Tonnes';
-  if (number >= 1e6 && number < 1e9) return +(number / 1e6).toFixed(1) + ' Tonnes';
-  if (number >= 1e9 && number < 1e12) return +(number / 1e9).toFixed(1) + ' Tonnes';
+  if (number >= 1e3 && number < 1e6)
+    return +(number / 1e3).toFixed(1) + ' Tons';
+  if (number >= 1e6 && number < 1e9)
+    return +(number / 1e6).toFixed(1) + ' Tons';
+  if (number >= 1e9 && number < 1e12)
+    return +(number / 1e9).toFixed(1) + ' Tons';
   if (number >= 1e12) return +(number / 1e12).toFixed(1) + 'T';
 };
 
 export default function LiquidityChart() {
-  let [date, setDate] = useState(1624147200);
+  let [date, setDate] = useState(1667147200);
   let [liquidity, setLiquidity] = useState('547792029');
   const formattedDate = format(new Date(date * 1000), 'MMMM d, yyyy');
   const dailyLiquidity = numberAbbr(liquidity);
@@ -34,7 +37,7 @@ export default function LiquidityChart() {
   return (
     <div className="rounded-lg bg-white p-6 shadow-card dark:bg-light-dark sm:p-8">
       <h3 className="mb-1.5 text-sm uppercase tracking-wider text-gray-600 dark:text-gray-400 sm:mb-2 sm:text-base">
-        Carbon Offset
+        Total Carbon Offset
       </h3>
       <div className="mb-1 text-base font-medium text-gray-900 dark:text-white sm:text-xl">
         {dailyLiquidity}

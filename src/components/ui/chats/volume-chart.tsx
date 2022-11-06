@@ -23,7 +23,7 @@ const numberAbbr = (number: any) => {
 };
 
 export default function VolumeChart() {
-  let [date, setDate] = useState(1624147200);
+  let [date, setDate] = useState(1667147200);
   let [volume, setVolume] = useState('547792029');
   const formattedDate = format(new Date(date * 1000), 'MMMM d, yyyy');
   const dailyVolume = numberAbbr(volume);
