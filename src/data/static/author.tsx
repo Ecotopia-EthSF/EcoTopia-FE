@@ -9,7 +9,7 @@ import User4 from '@/assets/images/avatar/1.png';
 import User5 from '@/assets/images/avatar/6.png';
 
 export const authorData = {
-  id: 157896,
+  id: 1,
   name: 'Rich Explorer',
   user_name: 'richexplorer.eth',
   wallet_key: '0x3aaa363e21424aB8Fb598f5763ba874bbb0B600b',
