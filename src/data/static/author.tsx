@@ -10,10 +10,9 @@ import User5 from '@/assets/images/avatar/6.png';
 
 export const authorData = {
   id: 157896,
-  name: 'GreenPilled',
-  user_name: 'Cameronwilliamson',
-  wallet_key:
-    '0x9Af568442868356c7aE834A47614600002545476555555555772d9F5B87e9b',
+  name: 'Rich Explorer',
+  user_name: 'richexplorer.eth',
+  wallet_key: '0x3aaa363e21424aB8Fb598f5763ba874bbb0B600b',
   created_at: 'November 2021',
   cover_image: {
     id: 1,
@@ -83,21 +82,9 @@ export const authorData = {
   socials: [
     {
       id: 1,
-      title: '@dontbesovasya',
-      link: 'https://dontbesovasya.io',
+      title: '@richexplorer',
+      link: 'https://richexplorer.com',
       icon: <Twitter className="w-4" />,
-    },
-  ],
-  links: [
-    {
-      id: 1,
-      title: '@dontbesovasya',
-      link: 'https://dontbesovasya.io',
-    },
-    {
-      id: 2,
-      title: '@dontbesovasya',
-      link: 'https://dontbesovasya.io',
     },
   ],
 };
